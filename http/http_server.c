@@ -36,25 +36,33 @@ char * response(int status_code, char * status_reason, char * content_type, char
 }
 
 int listen_and_serve(int fd, struct address *addr) {
-    printf("waiting on requests...\n");
     int s = accept(fd, (struct sockaddr *) &addr->addr, &addr->size);
     if (s < 0) {
         return -1;
     }
 
-    int len = 0;
+    int len = 1;
     ioctl(s, FIONREAD, &len);
-    char * req = (char *) malloc(len+1);
-    if (len > 0) {
-        len = read(s, req, len);
-    }
 
-    printf("writing response...\n");
+    char * req = (char *) malloc(len*sizeof(char));
+    strcpy(req, "");
+    char * buffer = (char *) malloc(1024*sizeof(char));
+    while (len > 0) {
+        ioctl(s, FIONREAD, &len);
+        if (len > 0) {
+            len = read(s, buffer, 1024-1);
+            strcat(req, buffer);
+        }
+    }
+    printf("%s\n", req);
+
     char * res = response(200, "OK", "text/plain", "hello world");
     write(s, res, strlen(res)*sizeof(char));
+    printf("%s\n\n", res);
     
     free(req);
     free(res);
+    free(buffer);
     close(s);
     return 1;
 }
