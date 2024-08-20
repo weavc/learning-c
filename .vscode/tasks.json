@@ -10,7 +10,7 @@
                 "${file}",
                 "http.c",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "/tmp/${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${fileDirname}"
