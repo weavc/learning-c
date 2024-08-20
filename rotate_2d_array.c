@@ -7,7 +7,7 @@
 
 
 // static variables are scoped to this file, even if defined inside a function
-static int size = 5;
+static int size = 3;
 
 typedef struct {
     short ** arr;
@@ -185,6 +185,9 @@ void rot_set(const arr_2d *set) {
 }
 
 int main() {
+    // future note: instead of rotating the 2d array in parts we can 
+    // create a 1d array and loop that around by its size
+    // ex: 3 - [1,2,3,6,9,8,7,4]
     arr_2d *set = new_set(size);
     set_seq_array(set);
 
