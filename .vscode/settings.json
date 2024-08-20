@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.templ": "templ",
+        "random": "c",
+        "string.h": "c"
+    }
+}

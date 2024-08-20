@@ -14,7 +14,7 @@ run/rotate: build/rotate
 	/tmp/${ROTATE_NAME}
 
 build/server: 
-	clang ./${HTTP_SERVE}.c -o /tmp/${HTTP_SERVE} -lm
+	gcc ./http/${HTTP_SERVE}.c ./http/http.c -o /tmp/${HTTP_SERVE} -lm
 
 run/server: build/server
 	/tmp/${HTTP_SERVE}
